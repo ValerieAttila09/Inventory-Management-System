@@ -15,6 +15,11 @@ This project uses PSR-4 autoloading and Twig for templating.
 Migrations & database:
 - Use Phinx for migrations. Configure database in `.env`.
 - Run migrations locally: `composer migrate` (runs `vendor/bin/phinx migrate -e development`).
+- Seed default admin user: `composer seed` or `docker-compose run --rm app composer seed`.
 
 Docker & mPDF:
-- The Docker image installs required PHP extensions (GD, intl, etc.) and will install `mpdf/mpdf` at build time using `composer install` inside the container.
+- The Docker image installs required PHP extensions (GD, intl, etc.) and will install `mpdf/mpdf` at build time using `composer update` inside the container.
+
+Automated setup script:
+- Run `./scripts/setup.sh` to perform a full setup (creates `.env` from `.env.example` if missing, builds images, starts DB, installs deps, runs migrations and seeds, builds CSS).
+- Use `./scripts/setup.sh --no-docker` to run a local-only setup (composer & npm locally) or `./scripts/setup.sh --dev` to start Tailwind in dev/watch mode.

@@ -24,8 +24,12 @@ WORKDIR /var/www/html
 # Copy app
 COPY . /var/www/html
 
+# Fix git ownership issue for composer inside container
+RUN git config --global --add safe.directory /var/www/html
+
 # Install PHP dependencies (run at build time)
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+# Use `composer update` inside the build to ensure composer.lock is consistent inside the image
+RUN composer update --no-interaction --prefer-dist --optimize-autoloader
 
 # Permissions
 RUN chown -R www-data:www-data /var/www/html
