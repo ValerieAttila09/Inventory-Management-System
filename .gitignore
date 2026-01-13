@@ -1,0 +1,17 @@
+# Vendor and dependency folders
+/vendor/
+/node_modules/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Build outputs
+/public/assets/
